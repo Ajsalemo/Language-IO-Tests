@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CreateFileController {
+public class AppendFileController {
 
-    @GetMapping("/file/create")
-    public ResponseEntity<String> createFile() {
+    @GetMapping("/file/append")
+    public ResponseEntity<String> appendFile() {
         final String id = UUID.randomUUID().toString();
-        final String fileName = "log-rotate-" + id + ".txt";
-        String content = "This is a logfile written with id: " + id;
+        final String fileName = "log-append.txt";
+        String content = "This logfile is appended with id: " + id + "\n";
         try {
             File directory = new File("Files");
             File file = new File(directory.getAbsolutePath() + File.separator + fileName);
-            try (Writer writer = new BufferedWriter(new FileWriter(file))) {
+            try (Writer writer = new BufferedWriter(new FileWriter(file, true))) {
                 writer.write(content);
-                return ResponseEntity.status(200).body("Creating logfile with id: " + id);
+                return ResponseEntity.status(200).body("Appending to log-append" + id);
             } 
         } catch (IOException e) {
             System.out.println(e.toString());

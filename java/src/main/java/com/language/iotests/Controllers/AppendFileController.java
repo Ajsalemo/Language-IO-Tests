@@ -24,7 +24,7 @@ public class AppendFileController {
             File file = new File(directory.getAbsolutePath() + File.separator + fileName);
             try (Writer writer = new BufferedWriter(new FileWriter(file, true))) {
                 writer.write(content);
-                return ResponseEntity.status(200).body("Appending to log-append" + id);
+                return ResponseEntity.status(200).body("Appending to log-append.txt");
             } 
         } catch (IOException e) {
             System.out.println(e.toString());

@@ -13,7 +13,7 @@ def index():
 @app.route("/file/create")
 def file_create():
     id = uuid.uuid4()
-    w = "./files/log-rotate-{id}.txt"
+    w = f"./files/log-rotate-{id}.txt"
     try:
         f = open(w, "w")
         f.write(f"This is a log file written with id: {id}")
@@ -27,7 +27,7 @@ def file_create():
 @app.route("/file/append")
 def file_append():
     id = uuid.uuid4()
-    a = "./files/log-append.txt"
+    a = f"./files/log-append.txt"
     try:
         f = open(a, "a")
         f.write(f"This logfile is appended with id: {id} \n")

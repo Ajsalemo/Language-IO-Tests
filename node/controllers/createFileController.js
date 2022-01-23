@@ -5,10 +5,11 @@ const path = require("path");
 const nanoid = require("nanoid");
 
 const createFileController = router.get("/", (_, res, next) => {
+  const filePath = process.env.FILE_PATH || "files"
   const id = nanoid.nanoid();
   const content = `This is a log file written with id: ${id}`;
   try {
-    fs.writeFile(path.join("files", `log-rotate-${id}.txt`), content, { flag: "w+" }, (err) => {
+    fs.writeFile(path.join(filePath, `log-rotate-${id}.txt`), content, { flag: "w+" }, (err) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ error: err });

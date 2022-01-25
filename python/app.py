@@ -41,3 +41,19 @@ def file_append():
     except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/file/read")
+def file_read():
+    d = os.getenv("FILE_PATH", "files")
+    r = f"{d}/log-append.txt"
+    line_arr = []
+    try:
+        f = open(r, "r")
+        lines = f.readlines()
+        for line in lines:
+            line_arr.append(line)
+        return jsonify({"message": line_arr})
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500

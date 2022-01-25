@@ -5,10 +5,11 @@ const path = require("path");
 const nanoid = require("nanoid");
 
 const appendFileController = router.get("/", (_, res, next) => {
+  const filePath = process.env.FILE_PATH || "files"
   const id = nanoid.nanoid();
   const content = `This logfile is appended with id: ${id} \n`;
   try {
-    fs.writeFile(path.join("files", `log-append.txt`), content, { flag: "a" }, (err) => {
+    fs.writeFile(path.join(filePath, `log-append.txt`), content, { flag: "a" }, (err) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ error: err });

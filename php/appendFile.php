@@ -3,7 +3,8 @@
 $id = uniqid(rand());
 $content = "This logfile is appended with id: " . $id . PHP_EOL;
 $filename = "log-append.txt";
-$appendFile = fopen("./files/" . $filename, "a") or die("Error in opening or creating file");
+$directory = getenv("FILE_PATH") ? getenv("FILE_PATH") : "files";
+$appendFile = fopen($directory . $filename, "a") or die("Error in opening or creating file");
 
 if ($appendFile) {
     fwrite($appendFile, $content);

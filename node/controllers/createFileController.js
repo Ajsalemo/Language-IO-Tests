@@ -9,11 +9,13 @@ const createFileController = router.get("/", (_, res, next) => {
   const id = nanoid.nanoid();
   const content = `This is a log file written with id: ${id}`;
   try {
+    console.time(`fileSave ${id}`);
     fs.writeFile(path.join(filePath, `log-rotate-${id}.txt`), content, { flag: "w+" }, (err) => {
       if (err) {
         console.log(err);
         return res.status(500).json({ error: err });
       }
+      console.timeEnd(`fileSave ${id}`);
       return res.json({ message: `Creating log file with id: ${id}` });
     });
   } catch (error) {
